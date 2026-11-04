@@ -20,12 +20,23 @@
   }
   function mount(p, raw) {
     try { sessionStorage.setItem(KEY, btoa(String.fromCharCode.apply(null, new Uint8Array(raw)))); } catch (e) {}
-    document.documentElement.className = p.h || '';
+    var root = document.documentElement;
+    root.className = p.h || '';
     document.body.className = p.b || '';
+    // main.js가 불러와지기 전에 모바일용 배치가 비치지 않도록 화면을 가렸다가 연다
+    var dq = window.matchMedia && window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
+    root.classList.add('js');
+    if (dq && dq.matches) root.classList.add('desk');
+    root.style.visibility = 'hidden';
+    var shown = false;
+    var reveal = function () { if (shown) return; shown = true; root.style.visibility = ''; };
     document.body.innerHTML = p.html;
     document.title = p.t || 'Portfolio';
     var s = document.createElement('script');
-    s.src = '/assets/js/main.js?v=6a4c40a8a1';
+    s.src = '/assets/js/main.js?v=62ef68f91a';
+    s.onload = function () { requestAnimationFrame(function () { requestAnimationFrame(reveal); }); };
+    s.onerror = reveal;
+    setTimeout(reveal, 4000);
     document.body.appendChild(s);
   }
 
