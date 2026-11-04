@@ -5,6 +5,8 @@
   var header = document.getElementById('header');
   if (header) initHeader();
   if (document.getElementById('ho-wo')) initHome();
+  initCase();
+  initContact();
   initLightbox();
 
   /* ---------- 헤더: 서울 시각, 등장 ---------- */
@@ -339,7 +341,131 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---------- 상세: 한 장씩 넘기는 카드 뷰어 ---------- */
+  function initCase() {
+    var track = document.getElementById('track');
+    var tabs = document.querySelectorAll('.tabs [role="tab"]');
+    document.documentElement.classList.add('js');
+    if (tabs.length) {
+      var show = function (id) {
+        tabs.forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-t') === id)); });
+        document.querySelectorAll('.tab-panel').forEach(function (p) { p.hidden = p.id !== id; });
+      };
+      tabs.forEach(function (b) { b.addEventListener('click', function () { show(b.getAttribute('data-t')); }); });
+      show(tabs[0].getAttribute('data-t'));
+    }
+    if (!track) return;
+    var slides = [].slice.call(track.children);
+    var ths = [].slice.call(document.querySelectorAll('#thumbs .th'));
+    var docBtns = [].slice.call(document.querySelectorAll('.doc'));
+    var prev = document.querySelector('.nav.prev'), nxt = document.querySelector('.nav.next');
+    var cnt = document.querySelector('.stage-cap .cnt'), cap = document.querySelector('.stage-cap .cap');
+    var thBox = document.getElementById('thumbs');
+    var cur = 0, ticking = false;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function firstOf(d) { for (var k = 0; k < slides.length; k++) if (slides[k].getAttribute('data-doc') === String(d)) return k; return 0; }
+    function setCur(k) {
+      cur = k;
+      var s = slides[k];
+      cnt.textContent = (k + 1) + ' / ' + slides.length;
+      cap.textContent = s.getAttribute('data-dt') + ' · ' + s.getAttribute('data-cap');
+      prev.disabled = k === 0; nxt.disabled = k === slides.length - 1;
+      ths.forEach(function (t, j) { t.classList.toggle('is-on', j === k); });
+      docBtns.forEach(function (d) { d.classList.toggle('is-on', d.getAttribute('data-doc') === s.getAttribute('data-doc')); });
+      var t = ths[k];
+      if (t && thBox) thBox.scrollTo({ left: t.offsetLeft - thBox.clientWidth / 2 + t.offsetWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function go(k, instant) {
+      k = Math.max(0, Math.min(slides.length - 1, k));
+      track.scrollTo({ left: k * track.clientWidth, behavior: instant || reduce ? 'auto' : 'smooth' });
+      if (instant) setCur(k);
+    }
+    track.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var k = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+        if (k !== cur) setCur(k);
+      });
+    }, { passive: true });
+    prev.addEventListener('click', function () { go(cur - 1); });
+    nxt.addEventListener('click', function () { go(cur + 1); });
+    ths.forEach(function (t, j) { t.addEventListener('click', function () { go(j); }); });
+    docBtns.forEach(function (d) { d.addEventListener('click', function () { go(firstOf(d.getAttribute('data-doc'))); }); });
+    document.addEventListener('keydown', function (e) {
+      if (document.querySelector('dialog[open]') || e.altKey || e.ctrlKey || e.metaKey) return;
+      var tg = e.target && e.target.tagName;
+      if (tg === 'INPUT' || tg === 'TEXTAREA' || (e.target && e.target.getAttribute && e.target.getAttribute('role') === 'tab')) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+    });
+    window.addEventListener('resize', function () { track.scrollTo({ left: cur * track.clientWidth, behavior: 'auto' }); });
+    var m = /^#d(\d+)$/.exec(location.hash || '');
+    if (m) go(firstOf(Number(m[1]) - 1), true);
+  }
+
   /* ---------- 상세: 이미지를 누르면 크게 보기 ---------- */
+  function initContact() {
+    var btn = document.querySelector('.btn-contact');
+    var dlg = document.getElementById('cdlg');
+    if (!btn) return;
+    if (!dlg || typeof dlg.showModal !== 'function') { btn.hidden = true; return; }
+    var q = dlg.querySelector('#cd-q'), opts = dlg.querySelector('#cd-opts'), err = dlg.querySelector('#cd-err');
+    var chk = dlg.querySelector('#cd-check'), done = dlg.querySelector('#cd-done');
+    var mail = dlg.querySelector('#cd-mail'), link = dlg.querySelector('#cd-link');
+    var copy = dlg.querySelector('#cd-copy'), msg = dlg.querySelector('#cd-copied');
+    var ans = 0, t0 = 0;
+    function rnd(n) { return Math.floor(Math.random() * n); }
+    function newQ() {
+      var a = 3 + rnd(7), b = 3 + rnd(7), set, d;
+      ans = a + b;
+      q.textContent = a + ' + ' + b + ' = ?';
+      set = [ans];
+      while (set.length < 4) { d = ans + rnd(9) - 4; if (d > 0 && set.indexOf(d) < 0) set.push(d); }
+      set.sort(function () { return Math.random() - 0.5; });
+      opts.textContent = '';
+      set.forEach(function (v) {
+        var o = document.createElement('button');
+        o.type = 'button'; o.className = 'cd-opt'; o.textContent = v; o.setAttribute('data-v', v);
+        opts.appendChild(o);
+      });
+      t0 = Date.now();
+    }
+    btn.addEventListener('click', function () {
+      chk.hidden = false; done.hidden = true; err.textContent = ''; msg.textContent = ''; mail.textContent = '';
+      newQ();
+      dlg.showModal();
+    });
+    opts.addEventListener('click', function (e) {
+      var o = e.target.closest ? e.target.closest('.cd-opt') : null, m;
+      if (!o || Date.now() - t0 < 600) return;
+      if (Number(o.getAttribute('data-v')) === ans) {
+        m = atob(btn.getAttribute('data-c'));
+        mail.textContent = m;
+        link.href = 'mailto:' + m + '?subject=' + encodeURIComponent(document.title.split(' | ')[0] + ' 문의');
+        chk.hidden = true; done.hidden = false;
+        link.focus();
+      } else {
+        err.textContent = '다시 선택해 주세요.';
+        newQ();
+      }
+    });
+    copy.addEventListener('click', function () {
+      var m = mail.textContent;
+      function ok() { msg.textContent = '복사했습니다.'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(m).then(ok, function () {});
+      else {
+        var r = document.createRange(), sel = window.getSelection();
+        r.selectNodeContents(mail); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); ok(); } catch (x) {}
+      }
+    });
+    dlg.querySelector('.cd-x').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { mail.textContent = ''; btn.focus(); });
+  }
+
   function initLightbox() {
     var zooms = document.querySelectorAll('a.zoom');
     if (!zooms.length || typeof HTMLDialogElement !== 'function') return;

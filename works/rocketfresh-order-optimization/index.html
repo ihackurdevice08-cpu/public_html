@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>폐기와 품절 사이, 신선식품 발주량 정하기 | Portfolio</title>
-<meta name="description" content="일괄 12% 안전 버퍼 대신 품목별 임계비율로 발주량을 정한 분석">
-<meta property="og:title" content="폐기와 품절 사이, 신선식품 발주량 정하기 | Portfolio">
-<meta property="og:description" content="일괄 12% 안전 버퍼 대신 품목별 임계비율로 발주량을 정한 분석">
+<title>로켓프레시 신선식품 발주 최적화 | Portfolio</title>
+<meta name="description" content="Newsvendor 방식으로 품목별 발주량을 정한 분석, 폐기 손실 55.7% 감소(시뮬레이션 기준)">
+<meta property="og:title" content="로켓프레시 신선식품 발주 최적화 | Portfolio">
+<meta property="og:description" content="Newsvendor 방식으로 품목별 발주량을 정한 분석, 폐기 손실 55.7% 감소(시뮬레이션 기준)">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -15,27 +15,73 @@
 </head>
 <body class="case-page">
 <a class="skip" href="#main">본문으로 건너뛰기</a>
-<header class="bar"><a class="bar-mark" href="/">Portfolio</a><nav aria-label="주 메뉴"><a href="/">Works</a><a href="/#about">About</a></nav></header>
-<main id="main" class="case">
-<section class="c-hero wrap">
-<p class="c-count">03 / 09</p>
-<h1 class="c-title">폐기와 품절 사이, 신선식품 발주량 정하기</h1>
+<header class="bar"><a class="bar-mark" href="/">Portfolio</a><nav aria-label="주 메뉴"><a href="/">Works</a><a href="/about/">About</a></nav></header>
+<main id="main" class="pd">
+<div class="wrap pd-grid">
+<section class="pd-view" aria-label="산출물 보기">
+<div class="stage">
+<ol class="track" id="track" tabindex="0"><li class="slide" data-doc="0" data-dt="로켓프레시 신선식품 발주 최적화" data-cap="이벤트별 오차와 편향"><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img01.webp"><img src="/assets/img/rocketfresh-order-optimization/img01.webp" alt="로켓프레시 신선식품 발주 최적화 이벤트별 오차와 편향" width="1600" height="629" decoding="async"></a></li><li class="slide" data-doc="0" data-dt="로켓프레시 신선식품 발주 최적화" data-cap="실제 대 예측 추이"><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img02.webp"><img src="/assets/img/rocketfresh-order-optimization/img02.webp" alt="로켓프레시 신선식품 발주 최적화 실제 대 예측 추이" width="1600" height="1143" loading="lazy" decoding="async"></a></li><li class="slide" data-doc="0" data-dt="로켓프레시 신선식품 발주 최적화" data-cap="정책별 성과"><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img03.webp"><img src="/assets/img/rocketfresh-order-optimization/img03.webp" alt="로켓프레시 신선식품 발주 최적화 정책별 성과" width="1600" height="629" loading="lazy" decoding="async"></a></li></ol>
+<button type="button" class="nav prev" aria-label="이전" disabled><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<button type="button" class="nav next" aria-label="다음"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</div>
+<p class="stage-cap"><span class="cnt">1 / 3</span><span class="cap">로켓프레시 신선식품 발주 최적화 · 이벤트별 오차와 편향</span></p>
+<div class="thumbs" id="thumbs"><button type="button" class="th is-on" data-k="0" aria-label="로켓프레시 신선식품 발주 최적화 이벤트별 오차와 편향"><img src="/assets/img/rocketfresh-order-optimization/t/img01.webp" alt="" width="200" height="79" loading="lazy" decoding="async"></button><button type="button" class="th" data-k="1" aria-label="로켓프레시 신선식품 발주 최적화 실제 대 예측 추이"><img src="/assets/img/rocketfresh-order-optimization/t/img02.webp" alt="" width="200" height="143" loading="lazy" decoding="async"></button><button type="button" class="th" data-k="2" aria-label="로켓프레시 신선식품 발주 최적화 정책별 성과"><img src="/assets/img/rocketfresh-order-optimization/t/img03.webp" alt="" width="200" height="79" loading="lazy" decoding="async"></button></div>
 </section>
-<div class="wrap"><dl class="c-meta"><div><dt>유형</dt><dd>데이터 분석</dd></div><div><dt>시기</dt><dd>8주차</dd></div><div><dt>도구</dt><dd>Python, pandas, statsmodels, scikit-learn</dd></div></dl></div>
-<div class="wrap c-lead"><p>일괄 12% 안전 버퍼 대신 품목별 임계비율로 발주량을 정한 분석</p></div>
-<figure class="c-full"><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img01.webp"><img src="/assets/img/rocketfresh-order-optimization/img01.webp" alt="이벤트별 예측 오차 MAPE와 편향 그래프" width="1600" height="629" decoding="async"></a><figcaption class="wrap">이벤트별 오차와 편향</figcaption></figure>
-<div class="wrap"><dl class="c-facts"><div><dt>데이터</dt><dd>10,860행</dd></div><div><dt>SKU</dt><dd>30개</dd></div><div><dt>기간</dt><dd>181일</dd></div><div><dt>센터</dt><dd>2곳</dd></div></dl></div>
-<section class="wrap c-grid"><h2 class="c-label">Overview</h2><p class="c-statement">유통기한이 2~10일인 신선식품은 폐기 손실과 품절 손실이 함께 발생. 예측값에 일괄 12% 버퍼를 더하는 기존 발주 규칙의 한계를 진단.</p></section>
-<section class="wrap c-grid"><h2 class="c-label">Intent</h2><p class="c-statement">폐기와 품절을 함께 줄이는 발주량을 찾는 것이 목표. 예측값에 일괄 12%를 더하는 기존 규칙이 품목 특성을 반영하지 못하는 문제에서 출발.</p></section>
-<section class="wrap c-grid"><h2 class="c-label">Direction</h2><dl class="dir"><div><dt>진단 먼저</dt><dd>모델보다 기존 방식의 문제 확인이 먼저</dd></div><div><dt>품목별 기준</dt><dd>품목마다 다른 폐기와 품절 손실을 반영</dd></div><div><dt>검증</dt><dd>정책 효과를 시뮬레이션 수치로 비교</dd></div></dl></section>
-<section class="wrap c-grid"><h2 class="c-label">Process</h2><ol class="steps"><li><span class="n">01</span><span class="t">데이터: 10,860행 31개 열, 풀필먼트 센터 2곳, SKU 30개, 181일, 카테고리 6개</span></li><li><span class="n">02</span><span class="t">기존 예측의 구조적 오차와 편향 진단</span></li><li><span class="n">03</span><span class="t">HistGradientBoosting 수요예측 모델 구축</span></li><li><span class="n">04</span><span class="t">품목별 Newsvendor 임계비율을 반영한 발주 최적화와 시뮬레이션</span></li></ol></section>
-<section class="wrap result"><h2 class="c-label">Result</h2>
-<div class="gal landscape"><figure><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img02.webp"><img src="/assets/img/rocketfresh-order-optimization/img02.webp" alt="실제 수요와 예측 수요의 추이 그래프" width="1600" height="1143" loading="lazy" decoding="async"></a><figcaption>실제 대 예측 추이</figcaption></figure><figure><a class="zoom" href="/assets/img/rocketfresh-order-optimization/img03.webp"><img src="/assets/img/rocketfresh-order-optimization/img03.webp" alt="발주 정책별 성과 비교 그래프" width="1600" height="629" loading="lazy" decoding="async"></a><figcaption>정책별 성과</figcaption></figure></div>
+<div class="pd-info">
+<p class="pd-sec">데이터 분석</p>
+<h1 class="pd-title">로켓프레시 신선식품 발주 최적화</h1>
+<p class="pd-sub">일괄 +12% 발주를 SKU별 최적 발주로 바꾸면 폐기 손실 55.7% 감소, 이익 14.0% 증가</p>
+<p class="pd-intent">폐기와 품절을 함께 줄이는 발주량을 찾는 것이 목표. 예측값에 일괄 12%를 더하는 기존 규칙이 품목 특성을 반영하지 못하는 문제에서 출발.</p>
+<dl class="c-facts"><div><dt>데이터</dt><dd>10,860행</dd></div><div><dt>폐기 손실</dt><dd>55.7% 감소</dd></div><div><dt>이익</dt><dd>14.0% 증가</dd></div><div><dt>평가 기간</dt><dd>2026.05~06</dd></div></dl>
+<h2 class="lbl">산출물</h2>
+<ol class="docs"><li><button type="button" class="doc is-on" data-doc="0"><span class="dt">로켓프레시 신선식품 발주 최적화</span><span class="df">분석 그림 · 3장 (감소율은 시뮬레이션 기준)</span></button></li></ol>
+<h2 class="lbl">제작 방향</h2><dl class="dir"><div><dt>진단 먼저</dt><dd>모델보다 기존 방식의 문제 확인이 먼저</dd></div><div><dt>품목별 기준</dt><dd>품목마다 다른 폐기와 품절 손실을 반영</dd></div><div><dt>검증</dt><dd>정책 효과를 시뮬레이션 수치로 비교</dd></div></dl>
+<dl class="pd-meta"><div><dt>시기</dt><dd>8주차</dd></div><div><dt>도구</dt><dd>Python, pandas, statsmodels, scikit-learn</dd></div></dl>
+<div class="pd-cta"><button type="button" class="btn-contact" data-c="MjAyMjMwMjlAaGFsbHltLmFjLmty">문의하기</button></div>
+</div>
+</div>
+<div class="wrap pd-more">
+<section class="pd-block" id="prompts" aria-labelledby="h-prompts">
+<div class="pb-head"><h2 id="h-prompts">사용 프롬프트</h2></div>
+<div class="pb-body"><details class="pr" open><summary><span class="pr-t">분석 코드 생성 프롬프트</span><span class="pr-m">Claude</span></summary><div class="pr-b"><pre class="pr-x">첨부한 'P4_fresh_inventory_daily.csv'(2개 센터 × 30개 SKU × 181일), 변수 설명 파일, 10개 행 샘플을 보고 아래 분석을 모두 수행하는 python 코드를 작성해줘.
+
+[상황]
+신선식품은 유통기한이 2~11일로 짧아 많이 주문하면 폐기가, 적게 주문하면 품절이 생긴다. 현재 발주는 기존 시스템 예측값에 12%를 더하는 단순 규칙이라 프로모션과 명절의 수요 급증을 반영하지 못한다. 폐기 손실과 품절 손실을 함께 줄이는 발주 정책이 필요하다.
+
+[1. 현황 진단] 카테고리별 폐기율·품절률, 폐기 손실액(원가 × 폐기량), 기회 손실액(마진 × 품절량)
+[2. 기존 예측 진단] 프로모션·명절·요일별 MAPE와 편향
+[3. 수요 예측 모델] 요일, 프로모션, 명절, 기온을 반영한 새 모델과 기존 예측 비교
+[4. 발주 최적화] 신문팔이(Newsvendor) 모형의 임계비율 = 마진 ÷ (마진 + 원가)로 SKU별 서비스 수준과 발주량 산출
+[5. 정책 시뮬레이션] 새 정책을 과거 데이터에 적용해 폐기·품절·이익 변화 비교 (앞 구간으로 학습하고 뒤 구간으로 평가)
+
+출력: 결과표와 핵심 수치를 'result.txt'로, 표는 csv로, 그래프는 png로 저장. 하나의 .py로 모두 생성되게 할 것.</pre></div></details><details class="pr"><summary><span class="pr-t">보고서 생성 프롬프트</span><span class="pr-m">Claude</span></summary><div class="pr-b"><pre class="pr-x">첨부한 'result.txt', 표(csv), 그래프를 이용해 로켓프레시 신선식품 발주 최적화 보고서를 한글(hwpx) 문서로 작성해줘.
+모델을 만들기 전에 기존 방식(예측값에 12% 일괄 가산)의 문제를 먼저 진단하고, 품목마다 폐기와 품절의 손실이 다르다는 점을 반영한 발주 규칙과 그 효과를 시뮬레이션 수치로 보여줘.
+수치는 result.txt에 있는 값만 쓰고, 시뮬레이션 결과라는 점을 본문에 밝혀줘. 개조식으로, 표와 그래프에는 한 줄 해석을 달아줘.</pre></div></details></div>
 </section>
-<nav class="wrap c-next" aria-label="다음 항목"><a href="/works/driver-attrition-analysis/"><span class="c-next-label">다음 항목</span><span class="c-next-title">배송기사 3,000명은 왜 떠나는가</span></a></nav>
+<section class="pd-block" id="steps" aria-labelledby="h-steps">
+<div class="pb-head"><h2 id="h-steps">작업 순서</h2></div>
+<div class="pb-body"><ol class="steps"><li><span class="n">01</span><span class="t">데이터: 10,860행 31개 열, 풀필먼트 센터 2곳, SKU 30개, 181일, 카테고리 6개</span></li><li><span class="n">02</span><span class="t">기존 예측의 구조적 오차와 편향 진단</span></li><li><span class="n">03</span><span class="t">HistGradientBoosting 수요예측 모델 구축</span></li><li><span class="n">04</span><span class="t">품목별 Newsvendor 임계비율을 반영한 발주 최적화와 시뮬레이션</span></li></ol></div>
+</section>
+</div>
 </main>
+<dialog id="cdlg" class="cdlg" aria-labelledby="cdlg-t">
+<button type="button" class="cd-x" aria-label="닫기"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<h2 id="cdlg-t">문의하기</h2>
+<div id="cd-check">
+<p class="cd-lead">메일 주소를 보려면 사람인지 확인합니다. 정답을 선택해 주세요.</p>
+<p class="cd-q" id="cd-q"></p>
+<div class="cd-opts" id="cd-opts" role="group" aria-label="정답 선택"></div>
+<p class="cd-err" id="cd-err" role="alert"></p>
+</div>
+<div id="cd-done" hidden>
+<p class="cd-lead">확인되었습니다. 아래 주소로 문의해 주세요.</p>
+<p class="cd-mail" id="cd-mail"></p>
+<div class="cd-act"><a class="cd-btn" id="cd-link" href="#">메일 쓰기</a><button type="button" class="cd-btn alt" id="cd-copy">주소 복사</button></div>
+<p class="cd-ok" id="cd-copied" role="status"></p>
+</div>
+</dialog>
 <footer class="site-footer"><div class="wrap">
-<p>임상우, 20223029, 한림대학교</p>
+<p>임상우, 한림대학교</p>
 <p>수업 과제 자료이며 투자 권유가 아닙니다.</p>
 </div></footer>
 <script src="/assets/js/main.js" defer></script>
