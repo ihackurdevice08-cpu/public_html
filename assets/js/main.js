@@ -12,7 +12,7 @@
   /* ---------- 헤더: 서울 시각, 등장 ---------- */
   function initHeader() {
     var dq = window.matchMedia('(min-width: 961px) and (hover: hover) and (pointer: fine)');
-    var setDesk = function () { html.classList.toggle('desk', dq.matches); };
+    var setDesk = function () { html.classList.toggle('desk', dq.matches && document.body.classList.contains('home')); };
     setDesk();
     if (dq.addEventListener) dq.addEventListener('change', setDesk); else if (dq.addListener) dq.addListener(setDesk);
     var t = document.querySelector('#header-time span');
