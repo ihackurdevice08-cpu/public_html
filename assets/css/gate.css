@@ -1,0 +1,22 @@
+/* 입장 화면: 사이트와 같은 색(흰색, 검정, 어두운 파랑 하나, 회색)과 크기 위계 */
+.gate { min-height: 100vh; min-height: 100svh; }
+.gt { min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto auto; padding: var(--gutter); max-width: 1200px; margin: 0 auto; }
+.gt-mark { margin: 0; overflow: hidden; }
+.gt-mark span { display: block; font-size: clamp(44px, 6vw, 72px); font-weight: 700; line-height: 1; letter-spacing: -0.05em; padding-bottom: 0.2rem; animation: gt-in 0.9s var(--ease) both; }
+.gt-form { align-self: center; width: 100%; max-width: 560px; padding: var(--s5) 0; }
+.gt-q { display: block; font-size: var(--fs-statement); font-weight: 700; line-height: 1.4; margin-bottom: var(--s3); }
+.gt-row { display: flex; gap: var(--s2); align-items: stretch; }
+.gt-row input { flex: 1; min-width: 0; font: inherit; font-size: 20px; padding: 14px 0; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); outline: none; letter-spacing: 0.08em; }
+.gt-row input:focus { border-bottom-color: var(--navy); }
+.gt-row button { font: inherit; font-size: var(--fs-body); font-weight: 700; padding: 0 var(--s4); background: var(--navy); border: 1px solid var(--navy); color: #fff; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.gt-row button:hover:not(:disabled) { background: #fff; color: var(--navy); }
+.gt-row button:disabled { opacity: 0.6; cursor: default; }
+.gt-row button:focus-visible, .gt-ask button:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+.gt-err { min-height: 1.7em; margin: var(--s2) 0 0; font-size: var(--fs-small); color: var(--navy); font-weight: 700; }
+.gt-hint { margin: var(--s2) 0 0; font-size: var(--fs-small); color: var(--sub); }
+.gt-ask { margin: 0; font-size: var(--fs-small); color: var(--sub); }
+.gt-ask button { font: inherit; color: var(--navy); background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.gt-foot { margin: var(--s2) 0 0; padding-top: var(--s2); border-top: 1px solid var(--line); font-size: var(--fs-small); color: var(--sub); }
+@keyframes gt-in { from { transform: translateY(110%); } to { transform: none; } }
+@media (max-width: 560px) { .gt-row { flex-direction: column; gap: var(--s3); } .gt-row button { padding: 16px; } }
+@media (prefers-reduced-motion: reduce) { .gt-mark span { animation: none; } }
