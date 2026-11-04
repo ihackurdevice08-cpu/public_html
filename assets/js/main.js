@@ -69,7 +69,7 @@
     function compute() {
       W = window.innerWidth; H = window.innerHeight;
       REM = parseFloat(getComputedStyle(html).fontSize);
-      var gap = REM * 0.5, y = 0, x = 0, maxH = 0, maxVW = 0, maxVH = 0;
+      var gap = REM * 1.2, y = 0, x = 0, maxH = 0, maxVW = 0, maxVH = 0;
       items.forEach(function (it) {
         it.w = it.rem * REM; it.h = it.w / it.a;
         it.l0 = { x: (W - it.w) / 2, y: y }; y += it.h + gap; maxH = Math.max(maxH, it.h);
@@ -79,14 +79,14 @@
       logoBase = REM * 13.25; maxItemH = maxVW; // 간격 = 13.25rem + (가장 넓은 폭 - 활성 항목 폭) / 2
       var gapMax = logoBase + maxVW / 2; // 이웃 항목이 밀려나는 최대 거리
       lp[1] = { at: W + gapMax + 20 }; lp[1].L = Math.max(x, lp[1].at + maxVW + gapMax + 20); // 화면 밖에서만 순환되도록
-      var c = (W - 13 * REM) / 12, ch = c * 1.4923;
+      var c = (W - 13 * REM) / 12, ch = c * 1.4923, rowH = 3 * c + 2 * REM;
       items.forEach(function (it) {
         var wd = it.gs * c + (it.gs - 1) * REM;
-        it.l2 = { x: REM + (it.gc - 1) * (c + REM), y: 3 * REM + (it.gr - 1) * (ch + 8 * REM), w: wd, h: wd / it.a };
+        it.l2 = { x: REM + (it.gc - 1) * (c + REM), y: 3 * REM + (it.gr - 1) * (rowH + 2 * REM), w: wd, h: wd / it.a };
       });
       var rows = parseInt(cellsEl.style.getPropertyValue('--rows'), 10) || 5;
-      lp[2] = { max: Math.max(0, 6 * REM + rows * ch + (rows - 1) * 8 * REM - H) };
-      cellsEl.style.setProperty('--ch', ch + 'px');
+      lp[2] = { max: Math.max(0, 6 * REM + rows * rowH + (rows - 1) * 2 * REM - H) };
+      cellsEl.style.setProperty('--ch', rowH + 'px');
     }
 
     function gapOff(cx, mid) {
@@ -130,8 +130,8 @@
     function setActive(k) {
       if (k === active) return;
       active = k;
-      var lh = 1.32 * REM, loop = n * lh;
-      tiLines.forEach(function (lines) {
+      tiLines.forEach(function (lines, li) {
+        var lh = (li === 0 ? 1.95 : 1.32) * REM, loop = n * lh;
         lines.forEach(function (a, i) {
           var o = i * lh, pos = mod(o - k * lh + loop / 2 - lh / 2, loop);
           a.style.transform = 'translate3d(0,' + (pos - o) + 'px,0)';
@@ -191,7 +191,7 @@
         it.el.style.transform = 'translate3d(' + r.x.toFixed(2) + 'px,' + r.y.toFixed(2) + 'px,0) rotate(' + r.rz.toFixed(3) + 'deg)';
         // 흑백과 불투명도
         if (mode < 2) { it.tbw = i === k ? 0 : 1; it.top = i === k ? 1 : 0.7; }
-        else { it.tbw = 1; it.top = i === hoverIdx ? 0 : 0.14; }
+        else { it.tbw = 1; it.top = i === hoverIdx ? 0 : 0.6; }
         it.bw = Math.abs(it.bw - it.tbw) < 0.005 ? it.tbw : it.bw + (it.tbw - it.bw) * F(C0);
         it.op = Math.abs(it.op - it.top) < 0.005 ? it.top : it.op + (it.top - it.op) * F(C0);
         it.im.style.filter = it.bw > 0.001 ? 'grayscale(' + it.bw.toFixed(3) + ')' : '';

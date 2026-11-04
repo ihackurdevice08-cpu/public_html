@@ -74,7 +74,7 @@ html.is-in #header-menu > a, html.is-in #header-time > span { transform: none; }
 #header-menu > a.is-on > span::before, #header-menu > a:hover > span::before { transform-origin: left; transform: scaleX(1); }
 
 /* 소개 문구 */
-#fix { position: fixed; top: 5rem; right: calc(var(--c) + var(--g) * 3); width: calc(var(--c) * 2); z-index: 25; }
+#fix { font-size: 1.5rem; position: fixed; top: 5rem; right: calc(var(--c) + var(--g) * 3); width: calc(var(--c) * 2); z-index: 25; }
 #fix-de { overflow: hidden; }
 #fix-de span { display: block; transform: translateY(110%); transition: transform 1s var(--expo) 0.15s; }
 html.is-in #fix-de span { transform: none; }
@@ -102,7 +102,7 @@ html.is-in #ho-wo-mo > button { transform: none; }
 /* 항목 */
 #ho-items { list-style: none; margin: 0; padding: 0; }
 .it { display: block; }
-.im { position: relative; display: block; overflow: hidden; background: #f3f4f6; }
+.im { position: relative; display: block; overflow: hidden; background: #e5e7eb; border: 1px solid #c9ced6; box-sizing: border-box; }
 .im img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ----- 데스크톱: 한 화면에 고정된 선택기 ----- */
@@ -112,7 +112,7 @@ html.desk main#main { position: absolute; inset: 0; overflow: hidden; }
 html.desk .page, html.desk #ho-wo { position: absolute; inset: 0; }
 html.desk .it { position: absolute; left: 0; top: 0; transform-origin: 50% 50%; will-change: transform, opacity; }
 html.desk .im { position: absolute; inset: 0; }
-html.desk .im img { position: absolute; left: 0; top: -5%; height: 110%; }
+html.desk .im img { position: absolute; left: 7%; top: 7%; width: 86%; height: 86%; object-fit: contain; }
 html.desk .cap { display: none; }
 html.desk .it.is-hv .im::after { content: ""; position: absolute; inset: 0.1rem; border: 0.1rem solid rgba(0, 0, 0, 0.1); }
 
@@ -120,10 +120,10 @@ html.desk #ho-wo-0, html.desk #ho-wo-1, html.desk #ho-wo-2 { position: absolute;
 html.desk #ho-wo-0 a, html.desk #ho-wo-1 a { pointer-events: auto; }
 
 /* Vertical: 왼쪽 목록과 가운데 메타 줄 */
-#ho-wo-0-ti { position: fixed; top: 50%; left: var(--g); width: calc(var(--c) * 2 + var(--g)); height: calc(var(--n) * 1.32rem); transform: translateY(-50%); overflow: hidden; line-height: 1.2; z-index: 4; }
+#ho-wo-0-ti { position: fixed; top: 50%; left: var(--g); width: calc(var(--c) * 2 + var(--g)); height: calc(var(--n) * 1.95rem); transform: translateY(-50%); overflow: hidden; line-height: 1.2; font-size: 1.5rem; z-index: 4; }
 #ho-wo-0-ti > div { display: flex; flex-direction: column; align-items: flex-start; transform: translateY(110%); transition: transform 1s var(--expo); }
 #ho-wo-0-ti a { display: block; white-space: nowrap; opacity: 0.21; }
-#ho-wo-0-me_ { position: fixed; top: 50%; left: calc(var(--c) * 2 + var(--g) * 3); width: calc(var(--c) * 10 + var(--g) * 9); height: 1.32rem; overflow: hidden; pointer-events: none; line-height: 1.2; transform: translateY(-50%); z-index: 4; }
+#ho-wo-0-me_ { position: fixed; top: 50%; left: calc(var(--c) * 2 + var(--g) * 3); width: calc(var(--c) * 10 + var(--g) * 9); height: 1.95rem; font-size: 1.5rem; overflow: hidden; pointer-events: none; line-height: 1.2; transform: translateY(-50%); z-index: 4; }
 #ho-wo-0-me { position: absolute; inset: 0; transform: translateY(110%); transition: transform 1s var(--expo); }
 #ho-wo-0-me > div { position: absolute; display: flex; opacity: 0; top: 50%; left: 0; transform: translateY(-50%); white-space: nowrap; }
 #ho-wo-0-me > div.is-on { opacity: 1; }
@@ -147,7 +147,7 @@ html.desk #ho-wo-0 a, html.desk #ho-wo-1 a { pointer-events: auto; }
 #ho-wo[data-mode="1"] #ho-wo-1-ti > div, #ho-wo[data-mode="1"] #ho-wo-1-me > div:first-child { transform: none; }
 
 /* Grid: 칸 번호와 가운데 미리보기 */
-#ho-wo-2-cells { position: absolute; left: 0; top: 0; width: 100%; padding: calc(var(--g) * 3) var(--g); display: grid; grid-template-columns: repeat(12, var(--c)); grid-auto-rows: var(--ch, 163px); gap: 8rem var(--g); opacity: 0; transition: opacity 0.8s var(--expo); will-change: transform; }
+#ho-wo-2-cells { position: absolute; left: 0; top: 0; width: 100%; padding: calc(var(--g) * 3) var(--g); display: grid; grid-template-columns: repeat(12, var(--c)); grid-auto-rows: var(--ch, 163px); gap: 2rem var(--g); opacity: 0; transition: opacity 0.8s var(--expo); will-change: transform; }
 #ho-wo-2-cells > div { opacity: 0.3; }
 #ho-wo[data-mode="2"] #ho-wo-2-cells { opacity: 1; }
 #ho-wo-2-ov { pointer-events: none; }

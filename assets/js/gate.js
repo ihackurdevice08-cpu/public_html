@@ -25,7 +25,7 @@
     document.body.innerHTML = p.html;
     document.title = p.t || 'Portfolio';
     var s = document.createElement('script');
-    s.src = '/assets/js/main.js';
+    s.src = '/assets/js/main.js?v=6a4c40a8a1';
     document.body.appendChild(s);
   }
 
