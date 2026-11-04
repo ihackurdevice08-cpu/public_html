@@ -224,6 +224,14 @@ html:not(.desk) .ab #ab-co-ma > div { width: auto; }
 .steps.plain li { grid-template-columns: minmax(0, 1fr); }
 .steps.plain .n { display: none; }
 
+.c-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s3); margin-top: var(--s5); }
+.c-facts dt { color: var(--sub); font-size: var(--fs-small); }
+.c-facts dd { margin: 4px 0 0; color: var(--navy); font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.25; }
+.dir { max-width: 760px; margin: 0; border-top: 1px solid var(--line); }
+.dir > div { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: var(--s2); padding: var(--s2) 0; border-bottom: 1px solid var(--line); }
+.dir dt { font-size: 16px; font-weight: 700; line-height: 1.7; }
+.dir dd { margin: 0; font-size: 18px; line-height: 1.7; }
+
 .result { padding-top: var(--s6); }
 .result .note { margin-top: var(--s1); color: var(--sub); }
 .gal { display: grid; gap: var(--s3); margin-top: var(--s4); }
@@ -254,6 +262,7 @@ dialog.lb button { display: block; margin: 0 0 var(--s1) auto; font-size: 14px; 
 @media (max-width: 640px) {
   .gal.landscape.two { grid-template-columns: 1fr; }
   .steps li { grid-template-columns: 40px minmax(0, 1fr); }
+  .dir > div { grid-template-columns: 1fr; gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   #header-title span, #header-menu > a, #header-time > span, #fix-de span, #ho-wo-mo > button, #logo #logo-l, #logo #logo-r { transition: none !important; }
